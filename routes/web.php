@@ -27,4 +27,4 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 // log User Out
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
-
+Route::resource('/Teacher',TeacherController::class);
