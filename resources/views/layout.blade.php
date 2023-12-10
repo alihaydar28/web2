@@ -15,7 +15,7 @@
     <header>
         <div class="logo" title="University Management System">
             <img src="{{ asset('assets/images/logo.png') }}" alt="">
-            <h2>U<span class="danger">M</span>S</h2>
+            <h2>U<span class="danger">Mm</span>S</h2>
         </div>
         <div class="navbar">
             <a href="{{ url('index.html') }}" class="active">
