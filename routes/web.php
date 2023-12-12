@@ -40,3 +40,4 @@ Route::get('/enrollmentCourses' , [EnrollmentController::class , 'enrollmentCour
 Route::get('/enrollmentClasses/{courseId}' , [EnrollmentController::class , 'enrollmentClasses'])->name('enrollmentClasses');
 Route::get('/enroll/{classId}' , [EnrollmentController::class , 'enroll'])->name('enroll');
 Route::get('/drop/{classId}' , [EnrollmentController::class , 'drop'])->name('drop');
+Route::get('/studentAttendance' , [StudentActionsController::class , 'studentAttendance'])->name('studentAttendance');

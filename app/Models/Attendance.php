@@ -11,7 +11,7 @@ class Attendance extends Model
 
     public function courseClass()
     {
-        return $this->belongsTo(CourseClass::class);
+        return $this->belongsTo(CourseClass::class,'courseclass_id');
     }
 
     public function student()
