@@ -15,12 +15,14 @@
                             @foreach ($classes as $class)
                                 <li>
                                     {{ $class->ClassName }} - {{ $class->course->CourseName }}
+                                    <!--
                                     <div class="action-buttons">
                                         <a href="{{ route('Quiz.create', ['class_id' => $class->id]) }}" class="btn btn-primary">Create Quiz</a>
                                         <a href="{{ route('Assignment.create', ['class_id' => $class->id]) }}" class="btn btn-success">Create Assignment</a>
                                         <a href="{{ route('showQuizzes', ['class_id' => $class->id]) }}" class="btn btn-info">Show Quizzes</a>
                                         <a href="{{ route('showAssignments', ['class_id' => $class->id]) }}" class="btn btn-warning">Show Assignments</a>
                                     </div>
+                                    -->
                                 </li>
                             @endforeach
                         </ul>

@@ -1,16 +1,16 @@
 <?php
 
-use App\Http\Controllers\StudentActionsController;
+use App\Http\Controllers\EnrollmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\StudentActionsController;
 
 
 
 Route::get('/', function () {
     return view('users/login');
 });
-
-Route::get('/dashboard' , [StudentActionsController::class , 'index'])->name('dashboard');
 
 //Show Register/Create Form
 Route::get('/register' , [UserController::class , 'create'])->name('register');
@@ -28,3 +28,12 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::resource('/Teacher',TeacherController::class);
+
+
+//Student
+
+Route::get('/studentDashboard' , [StudentActionsController::class , 'index'])->name('studentDashboard');
+Route::get('/enrollmentCourses' , [EnrollmentController::class , 'enrollmentCourses'])->name('enrollmentCourses');
+Route::get('/enrollmentClasses/{courseId}' , [EnrollmentController::class , 'enrollmentClasses'])->name('enrollmentClasses');
+Route::get('/enroll/{classId}' , [EnrollmentController::class , 'enroll'])->name('enroll');
+Route::get('/drop/{classId}' , [EnrollmentController::class , 'drop'])->name('drop');
