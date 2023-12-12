@@ -34,9 +34,14 @@ class CourseClass extends Model
         return $this->hasMany(Quiz::class);
     }
 
-
     public function students()
     {
         return $this->belongsToMany(Student::class, 'enrollments', 'class_id', 'student_id');
     }
+
+    public function isFull()
+    {
+        return $this->students->count() >= $this->ClassCapacity;
+    }
+
 }

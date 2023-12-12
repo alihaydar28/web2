@@ -21,15 +21,21 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'firstname' => $this->faker->firstName,
+            'lastname' => $this->faker->lastName,
+            'gender' => $this->faker->randomElement(['male', 'female']),
+            'dateofbirth' => $this->faker->date,
+            'email' => $this->faker->unique()->safeEmail,
+            'password' => bcrypt('password'), // You should use Hash::make() for a more secure password
+            'phone' => $this->faker->phoneNumber,
+            'current_address' => $this->faker->address,
+            'role_id' => 2, // Assuming the role_id for a regular user is 1
             'remember_token' => Str::random(10),
         ];
+
     }
 
     /**

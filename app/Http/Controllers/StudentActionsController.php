@@ -16,9 +16,9 @@ class StudentActionsController extends Controller
         if ($student) {
             $classes = $student->classes;
 
-            return view('student.dashboard')->with('classes', $classes);
+            return view('student.studentDashboard')->with('classes', $classes);
         } else {
-            return view('student.dashboard')->with('classes', []);
+            return view('student.studentDashboard')->with('classes', []);
         }
 
     }

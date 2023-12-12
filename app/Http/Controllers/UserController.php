@@ -41,7 +41,7 @@ class UserController extends Controller
             if ($user->role_id == 2) {
 
                 $request->session()->regenerate();
-                return redirect(route('dashboard'))->with('message', 'You are now logged in as a student!');
+                return redirect(route('studentDashboard'))->with('message', 'You are now logged in as a student!');
             }
 
 
