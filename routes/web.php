@@ -4,6 +4,7 @@ use App\Http\Controllers\EnrollmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\StudentActionsController;
 
 
@@ -28,7 +29,9 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::resource('/Teacher',TeacherController::class);
-
+Route::resource('/Assignment',AssignmentController::class);
+Route::get('/showQuizzes/{class_id}', [TeacherController::class, 'showQuizzes'])->name('showQuizzes');
+Route::get('/showAssignments/{class_id}', [TeacherController::class, 'showAssignments'])->name('showAssignments');
 
 //Student
 
