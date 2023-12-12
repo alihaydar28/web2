@@ -33,8 +33,8 @@
                 <span class="material-icons-sharp">today</span>
                 <h3>Schedule</h3>
             </a>
-            <a href="{{ route('enrollmentCourses') }}"
-                class="{{ request()->routeIs('enrollmentCourses') ? 'active' : '' }}">
+            <a href="{{ route('studentAttendance') }}"
+                class="{{ request()->routeIs('studentAttendance') ? 'active' : '' }}">
                 <span class="material-icons-sharp">today</span>
                 <h3>Attendance</h3>
             </a>
