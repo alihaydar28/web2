@@ -73,6 +73,11 @@ class TeacherController extends Controller
         //
     }
 
+<<<<<<< HEAD
+=======
+    // Inside your TeacherController.php
+
+>>>>>>> ab359a42c9ace5c1f15ddcbe72ba1f6b1f4ecff4
     public function showQuizzes($classId)
     {
         $quizzes = Quiz::where('class_id', $classId)->get();
