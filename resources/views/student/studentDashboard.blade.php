@@ -1,6 +1,5 @@
 @extends('layout')
 @section('content')
-
     <div class="container">
         <aside>
             <div class="profile">
@@ -9,7 +8,7 @@
                         <img src="{{ asset('assets/images/profile-1.jpg') }}" alt="">
                     </div>
                     <div class="info">
-                        <p><b>{{ auth()->user()->firstname . " " . auth()->user()->lastname }}</b> </p>
+                        <p><b>{{ auth()->user()->firstname . ' ' . auth()->user()->lastname }}</b> </p>
                         <small class="text-muted">student Id : {{ auth()->user()->id }}</small>
                     </div>
                 </div>
@@ -28,52 +27,68 @@
         </aside>
 
         <main>
-            <h1>My Classes</h1>
+            <h1>All My Classes</h1>
             <div class="subjects">
-
-                @forelse ( $classes as $class )
+                @forelse ($classes as $class)
                     <div class="eg">
                         <span class="material-icons-sharp">architecture</span>
-                        <h3>{{$class->Course->CourseName}}</h3>
-                        <h4>{{$class->ClassName}}</h4>
+                        <h3>{{ $class->Course->CourseName }}</h3>
+                        <h4>{{ $class->ClassName }}</h4>
                         <small class="text-muted">
-                            {{ substr($class->ClassDay, 0, 3) . " " . \Carbon\Carbon::createFromFormat('H:i:s', $class->ClassTime)->format('g:i A') }}
+                            {{ substr($class->ClassDay, 0, 3) . ' ' . \Carbon\Carbon::createFromFormat('H:i:s', $class->ClassTime)->format('g:i A') }}
                         </small>
-
-                        <small class="text-muted">location: {{$class->ClassLocation}}</small>
+                        <small class="text-muted">location: {{ $class->ClassLocation }}</small>
                     </div>
                 @empty
                     <div class="eg">
                         <h3>No class found</h3>
                     </div>
                 @endforelse
-
             </div>
 
             <div class="timetable" id="timetable">
                 <div>
-                    <span id="prevDay">&lt;</span>
-                    <h2>Today's Timetable</h2>
-                    <span id="nextDay">&gt;</span>
+                    <h2>Today's Classes</h2>
                 </div>
-                <span class="closeBtn" onclick="timeTableAll()">X</span>
+
                 <table>
                     <thead>
                         <tr>
-                            <th>Time</th>
-                            <th>Room No.</th>
                             <th>Subject</th>
+                            <th>Class</th>
+                            <th>Time and day</th>
+                            <th>Room</th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                        @forelse ($classes as $class)
+                            @if (date('l') == $class->ClassDay)
+                                <tr>
+                                    <td>{{ $class->Course->CourseName }}</td>
+                                    <td>{{ $class->ClassName }}</td>
+                                    <td>{{ substr($class->ClassDay, 0, 3) }}
+                                        {{ \Carbon\Carbon::createFromFormat('H:i:s', $class->ClassTime)->format('g:i A') }}
+                                    </td>
+                                    <td>{{ $class->ClassLocation }}</td>
+                                    <td></td> <!-- You can add more columns as needed -->
+                                </tr>
+                            @endif
+                        @empty
+                            <tr>
+                                <td colspan="4">No classes found</td>
+                            </tr>
+                        @endforelse
+
+                    </tbody>
                 </table>
             </div>
+
         </main>
 
         <div class="right">
             <div class="announcements">
-                <h2>Announcements</h2>
+                <h2>Latest Workshops</h2>
                 <div class="updates">
                     <div class="message">
                         <p> <b>Academic</b> Summer training internship with Live Projects.</p>
@@ -97,5 +112,4 @@
 
         </div>
     </div>
-
 @endsection
