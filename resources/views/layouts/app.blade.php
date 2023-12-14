@@ -1,38 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <head>
-        <!-- Other head elements -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
 </head>
-<body>
+<!-- Log on to codeastro.com for more projects -->
+<body class="bg-gray-100 font-sans antialiased">
+    <div id="app">
 
+        @include('layouts.navbar')
+        
+        <div class="main flex flex-wrap justify-end mt-16">
+            
+            @include('layouts.sidebar')
 
-<div>
-    <!-- Display any global alerts or messages here -->
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+            <div class="content w-full sm:w-5/6">
+                <div class="container mx-auto p-4 sm:p-6">
+
+                    @yield('content')
+                    
+                </div>
+            </div>
         </div>
-    @endif
+    </div>
 
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
-</div>
+    <script src="{{ asset('js/app.js') }}"></script>
 
-<div>
-    <!-- Main content section -->
-    @yield('content')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</div>
+    <script>
+        $(function() {
+            $( "#opennavdropdown" ).on( "click", function() {
+                $( "#navdropdown" ).toggleClass( "hidden" );
+            })
+        })
+    </script>
 
-<!-- Add your scripts or other footer elements here -->
+    @stack('scripts')
 
 </body>
 </html>
