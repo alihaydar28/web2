@@ -23,6 +23,11 @@ use App\Http\Controllers\AdminCourseController;
 
 //end JP
 
+//Elie
+use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\WorkshopController;
+//Elie
+
 
 Route::get('/', function () {
     return view('users/login');
@@ -104,4 +109,22 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::get('attendance', [AttendanceController::class, 'index'])->name('attendance.index');
 });
 
-// End JP
+//Elie
+Route::prefix('alumni')->group(function () {
+    Route::get('/', [AlumniController::class, 'index'])->name('alumni.index');
+    Route::get('/create', [AlumniController::class, 'create'])->name('alumni.create');
+    Route::post('/', [AlumniController::class, 'store'])->name('alumni.store');
+    Route::get('/{alumni}', [AlumniController::class, 'show'])->name('alumni.show');
+    Route::get('/{alumni}/edit', [AlumniController::class, 'edit'])->name('alumni.edit');
+    Route::put('/{alumni}', [AlumniController::class, 'update'])->name('alumni.update');
+    Route::delete('/{alumni}', [AlumniController::class, 'destroy'])->name('alumni.destroy');
+
+    Route::get('/{alumni}/workshops', [WorkshopController::class, 'index'])->name('alumni.workshops.index');
+    Route::get('/{alumni}/workshops/create', [WorkshopController::class, 'create'])->name('alumni.workshops.create');
+    Route::post('/{alumni}/workshops', [WorkshopController::class, 'store'])->name('alumni.workshops.store');
+    Route::get('/{alumni}/workshops/{workshop}', [WorkshopController::class, 'show'])->name('alumni.workshops.show');
+    Route::get('/{alumni}/workshops/{workshop}/edit', [WorkshopController::class, 'edit'])->name('alumni.workshops.edit');
+    Route::put('/{alumni}/workshops/{workshop}', [WorkshopController::class, 'update'])->name('alumni.workshops.update');
+    Route::delete('/{alumni}/workshops/{workshop}', [WorkshopController::class, 'destroy'])->name('alumni.workshops.destroy');
+});
+//Elie
