@@ -36,12 +36,12 @@ class CourseClass extends Model
 
     public function students()
     {
-        return $this->belongsToMany(Student::class, 'enrollments', 'class_id', 'student_id');
+        return $this->belongsToMany(Student::class, 'enrollments', 'class_id', 'student_id')
+            ->withTimestamps()
+            ->withPivot(['id']);
     }
 
-    public function isFull()
-    {
-        return $this->students->count() >= $this->ClassCapacity;
-    }
+
+
 
 }

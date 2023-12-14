@@ -11,7 +11,7 @@ class Student extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     public function parent()
@@ -24,13 +24,12 @@ class Student extends Model
         return $this->hasMany(StudentAnswer::class, 'student_id');
     }
 
-    public function classes()
+    public function enrollments()
     {
-        return $this->belongsToMany(CourseClass::class, 'enrollments', 'student_id', 'class_id');
+        return $this->belongsToMany(CourseClass::class, 'enrollments', 'student_id', 'class_id')
+            ->withTimestamps()
+            ->withPivot(['id']);
     }
 
-    public function attendances()
-    {
-        return $this->hasMany(Attendance::class, 'student_id');
-    }
+
 }
