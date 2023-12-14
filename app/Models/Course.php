@@ -13,4 +13,11 @@ class Course extends Model
     {
         return $this->hasMany(CourseClass::class);
     }
+
+    protected $fillable = [
+        'CourseCode',
+        'CourseName',
+        'CourseDescription',
+        'CourseCredit',
+    ];
 }
