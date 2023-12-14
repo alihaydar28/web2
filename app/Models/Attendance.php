@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attendance extends Model
 {
+    protected $fillable = ['courseclass_id', 'student_id', 'AttendanceDate', 'IsPresent'];
     use HasFactory;
 
     public function courseClass()

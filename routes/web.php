@@ -104,7 +104,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::get('/permission-edit/{id}', [RolePermissionController::class, 'editPermission'])->name('permission.edit');
     Route::put('/permission-update/{id}', [RolePermissionController::class, 'updatePermission'])->name('permission.update');
 
-  
+
 
     Route::get('attendance', [AttendanceController::class, 'index'])->name('attendance.index');
 });
@@ -128,3 +128,11 @@ Route::prefix('alumni')->group(function () {
     Route::delete('/{alumni}/workshops/{workshop}', [WorkshopController::class, 'destroy'])->name('alumni.workshops.destroy');
 });
 //Elie
+
+
+
+Route::get('/attendance/{class_id}', [TeacherAttendanceController::class, 'index'])->name('attendance.index');
+Route::post('/attendance/store', [TeacherAttendanceController::class, 'store'])->name('attendance.store');
+
+
+Route::get('/export-attendees/{class_id}', [ExcelController::class, 'exportAttendeesToExcel'])->name('export-attendees');
