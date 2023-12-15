@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('profile_picture')->default('avatar.png');
             $table->string('phone')->nullable();
             $table->string('current_address')->nullable();
+            $table->integer('parking_subscription')->nullable();
             $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();

@@ -1,32 +1,38 @@
 <?php
 
-use App\Http\Controllers\EnrollmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\AssignmentController;
-use App\Http\Controllers\StudentActionsController;
+use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\GradeController;
+use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\StripeController;
 
 // JP
-use App\Http\Controllers\adminAuthController;
 use App\Http\Controllers\CourseAController;
-use App\Http\Controllers\GradeController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\ParentsAController;
 use App\Http\Controllers\SubjectAController;
 use App\Http\Controllers\TeacherAController;
-use App\Http\Controllers\ParentsAController;
-use App\Http\Controllers\AttendanceAController;
+use App\Http\Controllers\WorkshopController;
+use App\Http\Controllers\adminAuthController;
 
-use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\AdminStudentController;
-use App\Http\Controllers\AdminTeacherController;
+use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\AdminCourseController;
+use App\Http\Controllers\AttendanceAController;
 
 //end JP
 
 //Elie
-use App\Http\Controllers\AlumniController;
-use App\Http\Controllers\WorkshopController;
+use App\Http\Controllers\AdminStudentController;
+use App\Http\Controllers\AdminTeacherController;
+
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\StudentActionsController;
+use App\Http\Controllers\TeacherAttendanceController;
 //Elie
+
+
 
 
 Route::get('/', function () {
@@ -90,6 +96,7 @@ Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name
     Route::put('/admin/courses/{course}', [AdminCourseController::class, 'update'])->name('admin.courses.update');
     Route::delete('/admin/courses/{course}', [AdminCourseController::class, 'destroy'])->name('admin.courses.destroy');
 
+    /*
 Route::middleware(['auth', 'role:Admin'])->group(function () {
 
 
@@ -108,7 +115,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::get('attendance', [AttendanceController::class, 'index'])->name('attendance.index');
 });
-
+*/
 //Elie
 Route::prefix('alumni')->group(function () {
     Route::get('/', [AlumniController::class, 'index'])->name('alumni.index');
@@ -136,3 +143,8 @@ Route::post('/attendance/store', [TeacherAttendanceController::class, 'store'])-
 
 
 Route::get('/export-attendees/{class_id}', [ExcelController::class, 'exportAttendeesToExcel'])->name('export-attendees');
+
+
+Route::get('/checkout', 'App\Http\Controllers\StripeController@checkout')->name('checkout');
+Route::post('/session', 'App\Http\Controllers\StripeController@session')->name('session');
+Route::get('/success', 'App\Http\Controllers\StripeController@success')->name('success');

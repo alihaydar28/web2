@@ -26,6 +26,7 @@ class User extends Authenticatable
         'password',
         'phone',
         'current_address',
+        'parking_subscription',
     ];
 
     /**
