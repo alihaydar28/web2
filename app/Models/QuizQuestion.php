@@ -9,6 +9,15 @@ class QuizQuestion extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'quiz_id',
+        'QuestionText',
+        'IsMCQ',
+        'IsTrueFalse',
+        'IsFreeText',
+        'QuestionGrade',
+    ];
+
     public function quiz()
     {
         return $this->belongsTo(Quiz::class);
@@ -16,17 +25,17 @@ class QuizQuestion extends Model
 
     public function mcqChoices()
     {
-        return $this->hasMany(Mcqchoices::class);
+        return $this->hasMany(Mcqchoices::class, 'question_id');
     }
 
     public function trueFalseAnswer()
     {
-        return $this->hasOne(TruefalseAnswers::class);
+        return $this->hasOne(TruefalseAnswers::class,'question_id');
     }
 
     public function freeTextAnswer()
     {
-        return $this->hasOne(FreetextAnswers::class);
+        return $this->hasOne(FreetextAnswers::class,'question_id');
     }
 
     public function studentAnswers()

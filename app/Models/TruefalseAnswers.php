@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class TruefalseAnswers extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'IsTrue',
+    ];
     public function question()
     {
         return $this->belongsTo(QuizQuestion::class);
