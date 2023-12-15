@@ -136,3 +136,10 @@ Route::post('/attendance/store', [TeacherAttendanceController::class, 'store'])-
 
 
 Route::get('/export-attendees/{class_id}', [ExcelController::class, 'exportAttendeesToExcel'])->name('export-attendees');
+
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
+Route::post('/auth/google', [LoginController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
