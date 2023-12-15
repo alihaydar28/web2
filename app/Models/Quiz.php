@@ -8,13 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Quiz extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'QuizTitle',
-        'QuizDescription',
-        'QuizDateAndTime',
-        'QuizDurationMin',
-
-    ];
 
     public function courseClass()
     {
