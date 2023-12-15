@@ -22,19 +22,34 @@ class EnrollmentController extends Controller
 
     public function enrollmentClasses(int $courseId)
     {
-        $userId = auth()->user()->id;
-        $student = Student::where('user_id', $userId)->first();
-        $classes = $student->classes;
-
         $course = Course::with('courseClasses')->find($courseId);
         $allClasses = $course->courseClasses;
-
-        return view('student.enrollmentClasses')->with(['allClasses' => $allClasses, 'selectedCourse' => $course ,'classes'=>$classes]);
+        return view('student.enrollmentClasses')->with(['allClasses' => $allClasses, 'selectedCourse' => $course]);
     }
+
+    /*
+    public function enroll1(int $classId)
+    {
+        $studentRoleId = Role::where('name', 'student')->first()->id;
+
+        if (auth()->user()->role_id != $studentRoleId) {
+            return back()->with("message", "only students are allowed to enroll in classes!");
+        }
+
+        $user = auth()->user();
+        $studentId = $user->student->id;
+
+        $enrollment = new Enrollment();
+        $enrollment->student_id = $studentId;
+        $enrollment->class_id = $classId;
+        $enrollment->save();
+
+        return back()->with("success", "successfully enrolled!");
+    }
+    */
 
     public function enroll(int $classId)
     {
-        $classToEnroll = CourseClass::find($classId);
         $studentRoleId = Role::where('name', 'student')->first()->id;
 
         if (auth()->user()->role_id != $studentRoleId) {
@@ -51,21 +66,6 @@ class EnrollmentController extends Controller
             if($courseNotEnrolled == $courseEnrolled){
                 return back()->with("message", "You are already enrolled in a class for this course.");
             }
-        }
-
-        foreach($classes as $class){
-
-            $classesDay=$class->ClassDay;
-            $classToEnrollDay=$class->ClassDay;
-
-            if($classesDay == $classToEnrollDay){
-                $classesTime= $class->ClassTime;
-                $classToEnrollTime=$classToEnroll->ClassTime;
-                if($classesTime == $classToEnrollTime){
-                    return back()->with("message", "Schedule conflict! You are already enrolled in a class at the same time.");
-                }
-            }
-
         }
 
         $enrollment = new Enrollment();

@@ -8,16 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Mcqchoices extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'id',
-        'question_id',
-        'ChoiceText',
-        'IsCorrect',
-    ];
     public function question()
     {
-        return $this->belongsTo(QuizQuestion::class,'question_id');
+        return $this->belongsTo(QuizQuestion::class);
     }
     public function studentAnswers()
     {

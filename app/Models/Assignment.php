@@ -9,12 +9,10 @@ class Assignment extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'class_id',
-        'assignment_name', // Add this line
-        'assignment_description',
-        'assignment_start_date',
-        'assignment_end_date',
-    ];
+    public function files()
+    {
+        return $this->hasMany(AssignmentFile::class);
+    }
+
 
 }
