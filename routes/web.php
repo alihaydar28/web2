@@ -1,11 +1,29 @@
 <?php
 
+
+use App\Http\Controllers\EnrollmentController;
+use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TeacherAttendanceController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\StripeController;
+
+
+use App\Http\Controllers\QuizController;
+use App\Http\Controllers\QuizQuestionController;
+use App\Http\Controllers\MCQChoiceController;
+use App\Http\Controllers\FreeTextController;
+use App\Http\Controllers\TrueFalseController;
+
+
+
+
+
 
 // JP
 use App\Http\Controllers\CourseAController;
@@ -145,6 +163,25 @@ Route::post('/attendance/store', [TeacherAttendanceController::class, 'store'])-
 Route::get('/export-attendees/{class_id}', [ExcelController::class, 'exportAttendeesToExcel'])->name('export-attendees');
 
 
+
 Route::get('/checkout', 'App\Http\Controllers\StripeController@checkout')->name('checkout');
 Route::post('/session', 'App\Http\Controllers\StripeController@session')->name('session');
 Route::get('/success', 'App\Http\Controllers\StripeController@success')->name('success');
+
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
+Route::post('/auth/google', [LoginController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
+
+
+Route::resource('/Quiz',QuizController::class);
+Route::resource('/Assignment',AssignmentController::class);
+Route::resource('/QuizQuestions',QuizQuestionController::class);
+Route::get('/load-question-type-view', [QuizQuestionController::class, 'loadQuestionTypeView'])
+    ->name('loadQuestionTypeView');
+Route::resource('/MCQChoice',MCQChoiceController::class);
+Route::resource('/TrueFalse',TrueFalseController::class);
+Route::resource('/FreeText',FreeTextController::class);
+
